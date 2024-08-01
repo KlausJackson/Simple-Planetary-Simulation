@@ -33,7 +33,7 @@ Tech With Tim tutorial video : [link to video](https://www.youtube.com/watch?v=W
 
 Here's the end result of the code.
 
-![preview](preview.mp4)
+![preview](preview.gif)
 
 ## Requirements (for running Python code)
 
