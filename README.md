@@ -29,6 +29,11 @@ Tech With Tim tutorial video : [link to video](https://www.youtube.com/watch?v=W
 [![Steam](https://img.shields.io/badge/Steam-000050?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/KlausJackson/)
 [![Twitter](https://img.shields.io/badge/Twitter-0044BB?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/Klaus_Jackson2)
 
+## Preview
+
+Here's the end result of the code.
+![preview](preview.mp4)
+
 ## Requirements (for running Python code)
 
 Python 3.8 or higher
