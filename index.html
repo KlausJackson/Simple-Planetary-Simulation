@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <canvas id="myCanvas" width="800" height="650"></canvas>
+    <canvas id="myCanvas" width="1000" height="700"></canvas>
 
     <script>
         // Constants
@@ -27,8 +27,8 @@
         const SCALE = 200 / AU; // Scale for the simulation, 1AU = 100 pixels
         // the smaller the scale, the bigger the planets and the closer they are to each other.
         const TIMESTEP = 60 * 60 * 12; // half a day
-        const WIDTH = 800;
-        const HEIGHT = 600;
+        const WIDTH = 1000;
+        const HEIGHT = 700;
 
         // Colors
         const BLACK = 'rgb(0, 0, 0)';
@@ -171,7 +171,7 @@
                     planets[i].draw();
                 }
 
-                ctx.font = '12px Arial';
+                ctx.font = '14px Arial';
                 ctx.fillStyle = WHITE;
                 ctx.fillText(`Time Step: ${TIMESTEP} (12 hours)`, 50, 50);
             }
