@@ -14,9 +14,9 @@
 ![Stars](https://img.shields.io/github/stars/KlausJackson/Simple-Planetary-Simulation.github.io.svg)
 ![Watchers](https://img.shields.io/github/watchers/KlausJackson/Simple-Planetary-Simulation.github.io.svg)
 
-A for-fun simple project, inspired by Tech With Tim. Python code included.
-Special thanks to Tech With Time for his valuable content and tutorials.
-Tech With Tim source code repo : [link to repo](https://github.com/techwithtim/Python-Planet-Simulation)
+A for-fun simple project, inspired by Tech With Tim. Python code included. <br>
+Special thanks to Tech With Time for his valuable content and tutorials. <br>
+Tech With Tim source code repo : [link to repo](https://github.com/techwithtim/Python-Planet-Simulation) <br>
 Tech With Tim tutorial video : [link to video](https://www.youtube.com/watch?v=WTLPmUHTPqo&ab_channel=TechWithTim)
 
 ## How To Contact Me
