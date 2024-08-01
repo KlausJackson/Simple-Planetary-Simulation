@@ -15,6 +15,7 @@
 ![Watchers](https://img.shields.io/github/watchers/KlausJackson/Simple-Planetary-Simulation.github.io.svg)
 
 A for-fun simple project, inspired by Tech With Tim. Python code included. <br>
+In my HTML code, the planets slow down over time, no idea why, anyone got a clue? <br>
 Special thanks to Tech With Time for his valuable content and tutorials. <br>
 Tech With Tim source code repo : [link to repo](https://github.com/techwithtim/Python-Planet-Simulation) <br>
 Tech With Tim tutorial video : [link to video](https://www.youtube.com/watch?v=WTLPmUHTPqo&ab_channel=TechWithTim)
@@ -50,14 +51,3 @@ They're all Python default library so no need to install anything except for Pyt
 If you have any problem while running the code or any ideas to improve it, feel free to file an issue.
 
 That's all I got. Enjoy!
-
-
-
-
-
-
-
-
-
-
-
