@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Planetary Simulation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+        }
+
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="800" height="650"></canvas>
+
+    <script>
+        // Constants
+        const AU = 149.6e6 * 1000; // 1 Astronomical Unit (AU) is the average distance from the Earth to the Sun
+        const G = 6.67430e-11; // Gravitational constant
+        const SCALE = 200 / AU; // Scale for the simulation, 1AU = 100 pixels
+        // the smaller the scale, the bigger the planets and the closer they are to each other.
+        const TIMESTEP = 60 * 60 * 12; // half a day
+        const WIDTH = 800;
+        const HEIGHT = 600;
+
+        // Colors
+        const BLACK = 'rgb(0, 0, 0)';
+        const WHITE = 'rgb(255, 255, 255)';
+        const YELLOW = 'rgb(255, 255, 0)';
+        const BLUE = 'rgb(0, 0, 255)';
+        const GREEN = 'rgb(0, 255, 0)';
+        const ORANGE = 'rgb(255, 165, 0)';
+        const RED = 'rgb(255, 0, 0)';
+
+        // Get the canvas and its 2D context
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Planets
+        class Planet {
+            constructor(name, x, y, radius, color1, color2, mass) {
+                this.x = x;
+                this.y = y;
+                this.name = name;
+                this.orbit = []; // list of points that the planet has orbited
+                this.radius = radius;
+                this.color1 = color1;
+                this.color2 = color2;
+                this.mass = mass;
+                this.xVel = 0;
+                this.yVel = 0;
+                this.sun = false;
+                this.distanceToSun = 0; // distance from the sun
+            }
+
+            draw() {
+                let x = this.x * SCALE + WIDTH / 2;
+                let y = this.y * SCALE + HEIGHT / 2;
+
+                if (this.orbit.length > 2) {
+                    let updatePoints = [];
+                    for (let i = 0; i < this.orbit.length; i++) {
+                        let point = this.orbit[i];
+                        x = point[0] * SCALE + WIDTH / 2;
+                        y = point[1] * SCALE + HEIGHT / 2;
+                        updatePoints.push([x, y]);
+                    }
+
+                    // draw the full orbit line
+                    for (let i = 0; i < updatePoints.length - 1; i++) {
+                        let color = `hsl(${(i * 360 / 500) % 360}, 100%, 50%)`;
+                        ctx.beginPath();
+                        ctx.moveTo(updatePoints[i][0], updatePoints[i][1]);
+                        ctx.lineTo(updatePoints[i + 1][0], updatePoints[i + 1][1]);
+                        ctx.strokeStyle = color;
+                        ctx.stroke();
+                    }
+                }
+
+                // draw the planet
+                ctx.beginPath();
+                ctx.arc(x, y, this.radius + 20, 0, 2 * Math.PI);
+                ctx.fillStyle = BLACK;
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x, y, this.radius, 0, 2 * Math.PI);
+                ctx.fillStyle = this.color1;
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x, y, this.radius * 0.5, 0, 2 * Math.PI);
+                ctx.fillStyle = this.color2;
+                ctx.fill();
+
+                // display planet's name
+                ctx.font = '14px Arial';
+                ctx.fillStyle = WHITE;
+                ctx.fillText(this.name, x + 20, y + 5);
+            }
+
+            attraction(other) {
+                let otherX = other.x;
+                let otherY = other.y;
+                // Calculate the distance between the two planets
+                let distance = Math.sqrt((otherX - this.x) ** 2 + (otherY - this.y) ** 2);
+
+                if (other.sun) {
+                    this.distanceToSun = distance;
+                }
+
+                let force = G * this.mass * other.mass / (distance ** 2);
+                // Calculate the angle of the force
+                let theta = Math.atan2(otherY - this.y, otherX - this.x);
+                // Calculate the force components in the x and y directions
+                let forceX = Math.cos(theta) * force;
+                let forceY = Math.sin(theta) * force;
+                return [forceX, forceY];
+            }
+
+            move(planets) {
+                let totalForceX = 0;
+                let totalForceY = 0;
+                for (let i = 0; i < planets.length; i++) {
+                    if (this === planets[i]) {
+                        continue;
+                    }
+                    let [forceX, forceY] = this.attraction(planets[i]);
+                    totalForceX += forceX;
+                    totalForceY += forceY;
+                }
+
+                // Calculate the acceleration
+                this.xVel += totalForceX / this.mass * TIMESTEP;
+                this.yVel += totalForceY / this.mass * TIMESTEP;
+                // Calculate the new position
+                this.x += this.xVel * TIMESTEP;
+                this.y += this.yVel * TIMESTEP;
+                this.orbit.push([this.x, this.y]);
+            }
+        }
+
+        // Main loop
+        function main() {
+            // Other planets are way too big and too far to be seen in this super simple simulation.
+            let sun = new Planet('Sun', 0, 0, 696340 * SCALE * 20000, YELLOW, YELLOW, 1.989e30);
+            sun.sun = true;
+            let earth = new Planet('Earth', -1 * AU, 0, 6371 * SCALE * 1500000, BLUE, GREEN, 5.972e24);
+            earth.yVel = 29.783 * 1000;
+            let mercury = new Planet('Mercury', 0.39 * AU, 0, 2439 * SCALE * 1500000, BLUE, YELLOW, 3.285e23);
+            mercury.yVel = -47.87 * 1000;
+            let mars = new Planet('Mars', -1.524 * AU, 0, 3389 * SCALE * 1500000, ORANGE, YELLOW, 6.39e23);
+            mars.yVel = 24.077 * 1000;
+            let venus = new Planet('Venus', 0.72 * AU, 0, 6051 * SCALE * 1500000, RED, ORANGE, 4.867e24);
+            venus.yVel = -35.02 * 1000;
+
+            let planets = [sun, earth, mercury, mars, venus];
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+                for (let i = 0; i < planets.length; i++) {
+                    planets[i].move(planets);
+                    planets[i].draw();
+                }
+
+                ctx.font = '12px Arial';
+                ctx.fillStyle = WHITE;
+                ctx.fillText(`Time Step: ${TIMESTEP} (12 hours)`, 50, 50);
+            }
+
+            animate();
+        }
+
+        main();
+    </script>
+</body>
+</html>
