@@ -32,6 +32,7 @@ Tech With Tim tutorial video : [link to video](https://www.youtube.com/watch?v=W
 ## Preview
 
 Here's the end result of the code.
+
 ![preview](preview.mp4)
 
 ## Requirements (for running Python code)
