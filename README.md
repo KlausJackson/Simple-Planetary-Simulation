@@ -37,7 +37,7 @@ Here's the end result of the code.
 
 ## Requirements (for running Python code)
 
-Python 3.8 or higher
+Python 3.8 or higher <br>
 Libraries and Frameworks used in this repository:
 
 - pygame (`pip install pygame`)
