@@ -1,6 +1,6 @@
 # Simple-Planetary-Simulation.github.io
 
-Website: <https://klausjackson.github.io/Simple-Planetary-Simulation.github.io/>
+Website: <https://klausjackson.github.io/Simple-Planetary-Simulation/>
 
 [![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://shields.io/)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
@@ -29,7 +29,6 @@ Tech With Tim tutorial video : [link to video](https://www.youtube.com/watch?v=W
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/KlausJackson/)
 [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:KlausJackson2@gmail.com)
 [![Steam](https://img.shields.io/badge/Steam-000050?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/KlausJackson/)
-[![Twitter](https://img.shields.io/badge/Twitter-0044BB?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/Klaus_Jackson2)
 
 ## Preview
 
